@@ -18,3 +18,5 @@ function operate(oper, a, b) {
         case "/": return divide(a, b);
     }
 }
+
+calcDisplay = document.querySelector(".calculator-display");

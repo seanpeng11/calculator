@@ -19,4 +19,11 @@ function operate(oper, a, b) {
     }
 }
 
-calcDisplay = document.querySelector(".calculator-display");
+const calcDisplay = document.querySelector(".calculator-display");
+const digits = document.querySelectorAll(".digit");
+const currentNumber = document.querySelector(".currentNumber");
+digits.forEach(function(digit) {
+    digit.addEventListener("click", function() {
+        currentNumber.textContent += this.textContent;
+    });
+});

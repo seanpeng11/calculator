@@ -24,11 +24,15 @@ const calcDisplay = document.querySelector(".calculator-display");
 const digits = document.querySelectorAll(".digit");
 const currentNumberDisplayed = document.querySelector(".currentNumber");
 let currentNumber = "";
+
+//Add digit clicked to display
 digits.forEach(function(digit) {
     digit.addEventListener("click", function() {
+        //Allow only one decimal point
         if (digit.textContent === "." && currentNumber.includes(".")) {
             return;
         }
+        //Delete leading zeroes
         if (!currentNumber.includes(".")
             && currentNumber.charAt(0) === "0"
             && digit.textContent !== ".") {
@@ -41,10 +45,14 @@ digits.forEach(function(digit) {
 
 const clear = document.getElementById("clear");
 const del = document.getElementById("del");
+
+//Clear display
 clear.addEventListener("click", () => {
     currentNumber = "";
     currentNumberDisplayed.textContent = "";
 });
+
+//Delete last digit
 del.addEventListener("click", () => {
     currentNumber = currentNumber.slice(0, -1);
     currentNumberDisplayed.textContent = currentNumber;
@@ -53,8 +61,11 @@ del.addEventListener("click", () => {
 const operators = document.querySelectorAll(".operator");
 let currentOperator;
 let storedNumber = 0;
+
+//Store previous number and operator
 operators.forEach(function(operator) {
     operator.addEventListener("click", function() {
+        //Allow operator chaining
         if (currentOperator !== undefined) {
             currentNumber = operate(currentOperator, +storedNumber, +currentNumber);
             currentNumberDisplayed.textContent = currentNumber;
@@ -66,6 +77,8 @@ operators.forEach(function(operator) {
 });
 
 const equals = document.getElementById("equals");
+
+//Update current number and display
 equals.addEventListener("click", function() {
     if (currentOperator === undefined) return;
     if (currentOperator === "/" && +currentNumber === 0) {
